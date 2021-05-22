@@ -2,7 +2,7 @@
   <v-container>
     <v-row>
       <v-col class="text-h4">
-        VBus Specification (Version {{ specFile.datecode }})
+        VBus Specification (Version {{ specFileDatecode }})
         <v-divider></v-divider>
       </v-col>
     </v-row>
@@ -214,6 +214,7 @@ export default {
   data: () => ({
     specFile: null,
     spec: null,
+    specFileDatecode: null,
     deviceSearch: '',
     deviceHeaders: [{
       text: 'Address',
@@ -263,6 +264,7 @@ export default {
 
       this.specFile = specFile;
       this.spec = spec;
+      this.specFileDatecode = specFile.datecode;
 
       this.updateView();
     });
