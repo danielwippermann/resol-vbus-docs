@@ -196,13 +196,16 @@ function formatHex(value, length, prefix) {
   return `${prefix}${value.toString(16).toUpperCase().padStart(length, '0')}`;
 }
 
-function getName(deviceSpec) {
-  logger.debug(deviceSpec);
+function getDeviceName(deviceSpec) {
   if (deviceSpec.selfAddress === 0) {
     return `Any device`;
   } else {
     return `${deviceSpec.fullName} (${formatHex(deviceSpec.selfAddress, 4, true)})`;
   }
+}
+
+function getPacketName(packetSpec) {
+  return `${getDeviceName(packetSpec.destinationDevice)} <= ${getDeviceName(packetSpec.sourceDevice)}, command ${formatHex(packetSpec.command, 4, true)}`;
 }
 
 export default {
@@ -278,8 +281,8 @@ export default {
       this.bytes = null;
 
       if (!this.id) {
-        logger.debug('Without packet ID');
-        logger.debug(this.specFile);
+        // logger.debug('Without packet ID');
+        // logger.debug(this.specFile);
 
         this.deviceItems = this.specFile.deviceTemplates.map(dt => {
           return {
@@ -294,21 +297,19 @@ export default {
           // logger.debug(packetSpec);
 
           return {
-            name: `${getName(packetSpec.destinationDevice)} <= ${getName(packetSpec.sourceDevice)}`,
+            name: getPacketName(packetSpec),
             toBytes: `/vsf/bytes/${packetSpec.packetId}`,
             toFields: `/vsf/fields/${packetSpec.packetId}`,
           };
         });
       } else if (this.id.length === 12) {
-        logger.debug(`With device ID "${this.id}"`);
+        // logger.debug(`With device ID "${this.id}"`);
       } else if (this.id.length === 20) {
-        logger.debug(`With packet ID "${this.id}"`);
+        // logger.debug(`With packet ID "${this.id}"`);
 
         const packetSpec = this.spec.getPacketSpecification(this.id);
 
-        logger.debug(packetSpec);
-
-        this.title = `${packetSpec.fullName} (${packetSpec.packetId})`;
+        this.title = `${getPacketName(packetSpec)} (${packetSpec.packetId})`;
 
         if (this.kind === 'fields') {
           this.fields = packetSpec.packetFields.map(pf => {
