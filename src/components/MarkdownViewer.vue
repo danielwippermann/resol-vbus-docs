@@ -60,7 +60,7 @@ const tocByLayout = {
       to: '/md/docs/installation-tutorial',
       title: 'Install the resol-vbus module',
     }, {
-      to: '/md/docs/connectin-tutorial',
+      to: '/md/docs/connection-tutorial',
       title: 'Creating and establishing a connection',
     }, {
       to: '/md/docs/live-data-tutorial',
