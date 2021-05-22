@@ -182,7 +182,7 @@ const tocByLayout = {
       to: '/md/docs/vbus-specification',
       title: 'RESOL VBus Specification',
     }, {
-      to: '/md/docs/vbus-packets',
+      to: '/vsf',
       title: 'RESOL VBus Packet List',
     }, {
       to: '/md/docs/vbus-recording-file-format',
