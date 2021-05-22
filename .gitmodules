@@ -1,0 +1,3 @@
+[submodule "public/resol-vbus"]
+	path = public/resol-vbus
+	url = https://github.com/danielwippermann/resol-vbus
