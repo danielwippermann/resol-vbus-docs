@@ -4,52 +4,97 @@
       app
       color="primary"
       dark
+      dense
     >
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
+      <v-app-bar-title>resol-vbus</v-app-bar-title>
 
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
+      <router-link
+        to="/"
+        class="dw-router-link"
+      >
+        About
+      </router-link>
+
+      <router-link
+        to="/md/docs/tutorials"
+        class="dw-router-link"
+      >
+        Tutorials
+      </router-link>
+
+      <router-link
+        to="/md/docs/docs"
+        class="dw-router-link"
+      >
+        Documentation
+      </router-link>
+
+      <router-link
+        to="/md/docs/examples"
+        class="dw-router-link"
+      >
+        Examples
+      </router-link>
+
+      <router-link
+        to="/md/docs/support"
+        class="dw-router-link"
+      >
+        Support
+      </router-link>
 
       <v-spacer></v-spacer>
 
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
+      {{ version.describe }}
     </v-app-bar>
 
     <v-main>
-      <router-view/>
+      <router-view></router-view>
     </v-main>
+
+    <v-overlay :value="state.asyncFgJobCount > 0">
+      <v-progress-circular
+        indeterminate
+        size="64"
+      ></v-progress-circular>
+    </v-overlay>
+
+    <v-snackbar
+      v-model="state.errorAlertVisible"
+      color="red"
+    >
+      {{ state.errorAlertMessage }}
+
+      <template v-slot:action="{ attrs }">
+        <v-btn
+          color="white"
+          text
+          v-bind="attrs"
+          @click="state.errorAlertVisible = false"
+        >
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
   </v-app>
 </template>
 
 <script>
+import state from '@/state';
+import version from '@/version.json';
 
 export default {
-  name: 'App',
-
   data: () => ({
-    //
+    state,
+    version,
   }),
 };
 </script>
+
+<style scoped>
+.dw-router-link {
+  color: white;
+  margin-left: 1em;
+  margin-right: 1em;
+}
+</style>

@@ -2,14 +2,37 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 
 import Home from '@/views/Home.vue';
+import Jsdoc from '@/views/Jsdoc.vue';
+import Md from '@/views/Md.vue';
+import Vsf from '@/views/Vsf.vue';
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: '/',
-    name: 'Home',
     component: Home
+  },
+  {
+    path: '/md/*',
+    component: Md,
+  },
+  {
+    path: '/jsdoc',
+    component: Jsdoc,
+  },
+  {
+    path: '/jsdoc/*',
+    component: Jsdoc,
+  },
+  {
+    path: '/vsf',
+    component: Vsf,
+  },
+  {
+    path: '/vsf/:kind/:id',
+    component: Vsf,
+    props: true,
   },
   {
     path: '/about',

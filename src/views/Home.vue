@@ -1,15 +1,17 @@
 <template>
-  <hello-world />
+  <v-container>
+    <MarkdownViewer
+      url="README"
+    ></MarkdownViewer>
+  </v-container>
 </template>
 
 <script>
-  import HelloWorld from '../components/HelloWorld'
+import MarkdownViewer from '@/components/MarkdownViewer';
 
-  export default {
-    name: 'Home',
-
-    components: {
-      HelloWorld,
-    },
-  }
+export default {
+  components: {
+    MarkdownViewer,
+  },
+};
 </script>
