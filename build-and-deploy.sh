@@ -4,6 +4,12 @@ cd "$(dirname "$0")"
 
 
 #
+# Remove node_modules directory
+#
+rm -rf public/resol-vbus/node_modules/
+
+
+#
 # Update JSDoc information
 #
 npx jsdoc --template ./node_modules/jsdoc-json --destination public/doc.json --recurse -R public/resol-vbus/README.md public/resol-vbus/src
