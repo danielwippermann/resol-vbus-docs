@@ -2,6 +2,7 @@
 node_modules
 /dist
 /src/version.json
+/public/doc.json
 
 
 # local env files
