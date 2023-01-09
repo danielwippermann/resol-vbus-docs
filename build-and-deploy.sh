@@ -1,6 +1,15 @@
 #!/bin/sh
 
+set -e
+
 cd "$(dirname "$0")"
+
+
+#
+# Make sure that everything is up-to-date
+#
+git pull
+(cd ../danielwippermann.github.io && git pull)
 
 
 #
