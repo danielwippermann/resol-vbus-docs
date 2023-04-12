@@ -6,6 +6,12 @@ cd "$(dirname "$0")"
 
 
 #
+# Make older Webpack work under Node 18
+#
+export NODE_OPTIONS=--openssl-legacy-provider
+
+
+#
 # Make sure that everything is up-to-date
 #
 git pull
