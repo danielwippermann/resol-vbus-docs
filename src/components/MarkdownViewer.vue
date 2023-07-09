@@ -196,6 +196,9 @@ const tocByLayout = {
     }, {
       to: '/md/docs/dlx-data-download-api',
       title: 'DLx Data Download API',
+    }, {
+      to: '/md/docs/vbus-parameterization',
+      title: 'VBus Parameterization',
     }],
   }],
 };
