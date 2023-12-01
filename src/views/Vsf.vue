@@ -98,6 +98,7 @@
                       <th>Name</th>
                       <th>Factor</th>
                       <th>Unit</th>
+                      <th>Signed?</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -113,6 +114,9 @@
                       </td>
                       <td>
                         {{ field.unit }}
+                      </td>
+                      <td>
+                        {{ field.isSigned }}
                       </td>
                     </tr>
                   </tbody>
@@ -149,6 +153,7 @@
                       <th>Name</th>
                       <th>Factor</th>
                       <th>Unit</th>
+                      <th>Signed?</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -167,6 +172,9 @@
                       </td>
                       <td>
                         {{ byte.unit }}
+                      </td>
+                      <td>
+                        {{ byte.isSigned }}
                       </td>
                     </tr>
                   </tbody>
@@ -313,11 +321,14 @@ export default {
 
         if (this.kind === 'fields') {
           this.fields = packetSpec.packetFields.map(pf => {
+            const isSigned = pf.parts.some(part => part.isSigned);
+
             return {
               id: `${packetSpec.packetId}_${pf.fieldId}`,
               name: pf.name.en || pf.name.de || pf.name.fr,
               factor: pf.factor.toFixed(pf.type.precision),
               unit: pf.type.unit.unitText,
+              isSigned: isSigned ? 'Yes' : 'No',
             };
           });
         } else if (this.kind === 'bytes') {
@@ -333,6 +344,7 @@ export default {
                 factor: (pf.factor * part.factor).toFixed(pf.type.precision),
                 unit: pf.type.unit.unitText,
                 bitPos: part.bitPos,
+                isSigned: part.isSigned ? 'Yes' : 'No',
               });
               return memo;
             }, memo);
